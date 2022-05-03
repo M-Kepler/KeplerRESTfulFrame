@@ -12,18 +12,19 @@ from jsonschema import FormatChecker, ValidationError, validate
 
 def extract_params(request):
     """
-    解析获取参数，返回dict
+    解析获取参数
 
-    :example
+    :return dict
+    :e.g.
         params = extract_params(request)
     """
-    cache = getattr(request, '_extract_param_cache', None)
+    cache = getattr(request, "_extract_param_cache", None)
     if cache is not None:
         return cache
     else:
-        con_type = request.headers.get('Content-Type')
+        con_type = request.headers.get("Content-Type")
         if isinstance(con_type, str):
-            if 'application/json' in con_type:
+            if "application/json" in con_type:
                 return request.get_json()
         return request.values
 
@@ -78,7 +79,7 @@ def check_params(param_config=None, header_config=None, *args, **kwargs):
 
     def deco(f):
         def extract_params(request):
-            if request.method == 'POST':
+            if request.method == "POST":
                 return request.get_json()
             else:
                 return request.args
@@ -94,7 +95,7 @@ def check_params(param_config=None, header_config=None, *args, **kwargs):
                             required_header[header_name])
                     else:
                         all_present = False
-            required_header['_all_params_present_'] = all_present
+            required_header["_all_params_present_"] = all_present
             return required_header
 
         @wraps(f)
@@ -106,8 +107,8 @@ def check_params(param_config=None, header_config=None, *args, **kwargs):
                     header_params = extract_headers(
                         headers=request.headers.get,
                         config=header_config)
-                    if not header_params.get('_all_params_present_'):
-                        return Exception('invalid headers')
+                    if not header_params.get("_all_params_present_"):
+                        return Exception("invalid headers")
                     return f(header_params=header_params, *args, **kwargs)
                 else:
                     return f(*args, **kwargs)

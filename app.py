@@ -11,13 +11,14 @@ from kepler.cgilib.register import Register
 
 APP = Flask(__name__)
 
-# 定义url入口点，根目录是/，每一个 Register则作为一个子目录，
+# 定义url入口点，根目录是/，每一个 Register 则作为一个子目录
 
 # 为所有 URL 的添加前缀 kepler
 url_register = Register(APP, "kepler")
 
 # 注册 /api_test1/ 目录下的资源，路径为 /kepler/api_test1/*
 api_test1_index(url_register, "api_test1")
+
 api_test2_index(url_register, "api_test2")
 
 

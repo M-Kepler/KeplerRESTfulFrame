@@ -11,13 +11,13 @@ from flask import request
 class CgiContextManager(object):
     @property
     def set_cookies(self):
-        if not hasattr(g, 'kepler__context_set_cookies'):
+        if not hasattr(g, "kepler__context_set_cookies"):
             g.kepler__context_set_cookies = dict()
         return g.kepler__context_set_cookies
 
     @set_cookies.setter
     def set_cookies(self, value):
-        assert isinstance(value, dict), 'Set-cookies must be a dict obj'
+        assert isinstance(value, dict), "Set-cookies must be a dict obj"
         g.kepler__context_set_cookies = value
 
     @property
@@ -26,7 +26,7 @@ class CgiContextManager(object):
 
     @property
     def user(self):
-        if not hasattr(g, 'kepler__context_user'):
+        if not hasattr(g, "kepler__context_user"):
             g.kepler__context_user = None
         return g.kepler__context_user
 

@@ -1,7 +1,7 @@
 
 # -*-coding:utf-8-*-
 
-from cgi.api_test1.manage.network_setting import NetWork
+from cgi.api_test1.manage.network import NetWork
 from kepler.cgilib.register import Register
 
 
